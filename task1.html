@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Student Details</title>
+    <link rel="stylesheet" href="task1.css">
+
+
+<script>
+    function calculateAge() {
+        let dobValue = document.getElementById("dob").value;
+
+        if (dobValue === "") {
+            document.getElementById("age").value = "";
+            document.getElementById("status").value = "";
+            return;
+        }
+
+        let dob = new Date(dobValue);
+        let today = new Date();
+
+        let age = today.getFullYear() - dob.getFullYear();
+        let month = today.getMonth() - dob.getMonth();
+
+        if (
+            month < 0 ||
+            (month === 0 && today.getDate() < dob.getDate())
+        ) {
+            age--;
+        }
+
+        document.getElementById("age").value = age;
+
+        if (age >= 13 && age <= 19) {
+            document.getElementById("status").value = "Teenager";
+        }
+        else if (age >= 18) {
+            document.getElementById("status").value = "Eligible to Vote";
+        }
+        else {
+            document.getElementById("status").value =
+                "Not a teenager / Not eligible to vote";
+        }
+    }
+
+
+    function validateForm() {
+
+        let firstName =
+            document.getElementById("firstName").value.trim();
+
+        let lastName =
+            document.getElementById("lastName").value.trim();
+
+        let fatherName =
+            document.getElementById("fatherName").value.trim();
+
+        let gender =
+            document.querySelector('input[name="gender"]:checked');
+
+        let dob =
+            document.getElementById("dob").value;
+
+        let email =
+            document.getElementById("email").value.trim();
+
+        let permanentAddress =
+            document.getElementById("permanentAddress").value.trim();
+
+        let phone =
+            document.getElementById("phone").value.trim();
+
+
+        /* Clear previous errors */
+
+        document.getElementById("firstNameError").innerHTML = "";
+        document.getElementById("lastNameError").innerHTML = "";
+        document.getElementById("fatherNameError").innerHTML = "";
+        document.getElementById("genderError").innerHTML = "";
+        document.getElementById("dobError").innerHTML = "";
+        document.getElementById("emailError").innerHTML = "";
+        document.getElementById("phoneError").innerHTML = "";
+        document.getElementById("permanentAddressError").innerHTML = "";
+
+
+        let valid = true;
+
+
+        /* First Name */
+
+        if (firstName === "") {
+
+            document.getElementById("firstNameError").innerHTML =
+                "First name is required";
+
+            valid = false;
+        }
+
+
+        /* Last Name */
+
+        if (lastName === "") {
+
+            document.getElementById("lastNameError").innerHTML =
+                "Last name is required";
+
+            valid = false;
+        }
+
+
+        /* Father Name */
+
+        if (fatherName === "") {
+
+            document.getElementById("fatherNameError").innerHTML =
+                "Father name is required";
+
+            valid = false;
+        }
+
+
+        /* Gender */
+
+        if (!gender) {
+
+            document.getElementById("genderError").innerHTML =
+                "Please select gender";
+
+            valid = false;
+        }
+
+
+        /* Date of Birth */
+
+        if (dob === "") {
+
+            document.getElementById("dobError").innerHTML =
+                "Date of birth is required";
+
+            valid = false;
+        }
+
+
+        /* Email */
+
+        let emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email === "") {
+
+            document.getElementById("emailError").innerHTML =
+                "Email is required";
+
+            valid = false;
+        }
+
+        else if (!emailPattern.test(email)) {
+
+            document.getElementById("emailError").innerHTML =
+                "Invalid email address";
+
+            valid = false;
+        }
+
+
+        /* Phone Number */
+
+        let phonePattern = /^[0-9]{10}$/;
+
+        if (phone === "") {
+
+            document.getElementById("phoneError").innerHTML =
+                "Phone number is required";
+
+            valid = false;
+        }
+
+        else if (!phonePattern.test(phone)) {
+
+            document.getElementById("phoneError").innerHTML =
+                "Phone number must contain exactly 10 digits";
+
+            valid = false;
+        }
+
+
+        /* Permanent Address */
+
+        if (permanentAddress === "") {
+
+            document.getElementById("permanentAddressError").innerHTML =
+                "Permanent address is required";
+
+            valid = false;
+        }
+
+
+        /* Final Result */
+
+        if (valid) {
+
+    let form = document.getElementById("studentForm");
+
+    let formData = new FormData(form);
+
+    console.log("Student Form Data:");
+
+    for (let [key, value] of formData.entries()) {
+
+        console.log(key + ":", value);
+
+    }
+
+    alert("Registration successful!");
+}
+    }
+</script>
+
+
+</head>
+
+<body>
+
+
+<form id="studentForm" onsubmit="event.preventDefault(); validateForm();">
+    <fieldset>
+
+        <h2>Student Details</h2>
+
+
+        <!-- First Name -->
+
+        <div class="form-row">
+
+            <label>First Name *</label>
+
+            <div class="input-container">
+
+                <input
+                 type="text"
+                  id="firstName"
+                 name="firstName"
+                  placeholder="Enter first name">
+
+                <span
+                    id="firstNameError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Middle Name -->
+
+        <div class="form-row">
+
+            <label>Middle Name</label>
+
+            <div class="input-container">
+
+                <input
+    type="text"
+    id="middleName"
+    name="middleName"
+    placeholder="Enter middle name"
+>
+
+            </div>
+
+        </div>
+
+
+        <!-- Last Name -->
+
+        <div class="form-row">
+
+            <label>Last Name *</label>
+
+            <div class="input-container">
+
+               <input
+    type="text"
+    id="lastName"
+    name="lastName"
+    placeholder="Enter last name"
+>
+
+                <span
+                    id="lastNameError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Father Name -->
+
+        <div class="form-row">
+
+            <label>Father Name *</label>
+
+            <div class="input-container">
+
+               <input
+    type="text"
+    id="fatherName"
+    name="fatherName"
+    placeholder="Enter father name"
+>
+
+                <span
+                    id="fatherNameError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Mother Name -->
+
+        <div class="form-row">
+
+            <label>Mother Name</label>
+
+            <div class="input-container">
+
+                <input
+    type="text"
+    id="motherName"
+    name="motherName"
+    placeholder="Enter mother name"
+>
+
+            </div>
+
+        </div>
+
+
+        <!-- Gender -->
+
+        <div class="form-row">
+
+            <label>Gender *</label>
+
+            <div class="input-container gender-container">
+
+                <input
+                    type="radio"
+                    name="gender"
+                    value="Male"
+                >
+                Male
+
+                <input
+                    type="radio"
+                    name="gender"
+                    value="Female"
+                >
+                Female
+
+                <span
+                    id="genderError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- City -->
+
+        <div class="form-row">
+
+            <label>City</label>
+
+            <div class="input-container">
+
+<input
+    type="text"
+    id="city"
+    name="city"
+    placeholder="Enter your city"
+>
+
+            </div>
+
+        </div>
+
+
+        <!-- Course -->
+
+        <div class="form-row">
+
+            <label>Course</label>
+
+<select id="course" name="course">
+                
+
+                    <option value="">
+                        Select Course
+                    </option>
+
+                    <option value="Computer Science">
+                        Computer Science
+                    </option>
+
+                    <option value="Electronics">
+                        Electronics
+                    </option>
+
+                    <option value="Mechanical">
+                        Mechanical
+                    </option>
+
+                    <option value="Civil">
+                        Civil
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="form-row">
+
+            <label>Email *</label>
+
+            <div class="input-container">
+
+                <input
+    type="text"
+    id="email"
+    name="email"
+    placeholder="Enter your email"
+>
+
+                <span
+                    id="emailError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Phone -->
+
+        <div class="form-row">
+
+            <label>Phone Number *</label>
+
+            <div class="input-container">
+
+                <input
+    type="text"
+    id="phone"
+    name="phone"
+    placeholder="Enter 10 digit phone number"
+    maxlength="10"
+>
+
+                <span
+                    id="phoneError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Date of Birth -->
+
+        <div class="form-row">
+
+            <label>Date of Birth *</label>
+
+            <div class="input-container">
+
+                <input
+    type="date"
+    id="dob"
+    name="dob"
+    onchange="calculateAge()"
+>
+
+                <span
+                    id="dobError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Age -->
+
+        <div class="form-row">
+
+            <label>Age</label>
+
+            <div class="input-container">
+
+                <input
+    type="text"
+    id="age"
+    name="age"
+    readonly
+>
+
+            </div>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="form-row">
+
+            <label>Status</label>
+
+            <div class="input-container">
+
+                <input
+    type="text"
+    id="status"
+    name="status"
+    readonly
+>
+
+            </div>
+
+        </div>
+
+
+        <!-- Temporary Address -->
+
+        <div class="form-row">
+
+            <label>Temporary Address</label>
+
+            <div class="input-container">
+
+                <textarea
+    id="temporaryAddress"
+    name="temporaryAddress"
+    placeholder="Enter temporary address"
+></textarea>
+
+            </div>
+
+        </div>
+
+
+        <!-- Permanent Address -->
+
+        <div class="form-row">
+
+            <label>Permanent Address *</label>
+
+            <div class="input-container">
+
+                <textarea
+    id="permanentAddress"
+    name="permanentAddress"
+    placeholder="Enter permanent address"
+></textarea>
+
+                <span
+                    id="permanentAddressError"
+                    class="error"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Register Button -->
+
+        <button type="submit">
+            Register
+        </button>
+
+    </fieldset>
+
+</form>
+```
+
+</body>
+
+</html>

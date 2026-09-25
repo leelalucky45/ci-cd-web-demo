@@ -1,0 +1,154 @@
+<!Doctype>
+<html>
+<head>
+<Title> Form</Title>
+<style>
+.error {
+    color: red;
+    display: block;
+    font-size: 14px;
+}
+</style>
+
+</head>
+
+<body>
+<form id="form"> 
+<label for="selecttype">Select Type* :  </label>
+
+<select id="selecttype" name="Select Type">
+<option value="selecttype">Select Type</option>
+<option value="Customer">Customer</option>
+<option value="Vendor"> Vendor</option>
+<option value="Branch/Unit">Branch/Unit</option>
+</select>
+<span id="selectTypeError" class="error"></span>
+
+<br><br>
+<label for="accountId"> Account Id*: </label>
+<input type ="text" id="accountId" name="Account Id*"></input>
+<span id="accountIdError"></span>
+<br><br>
+<label for="accountName">Account Name* :</label>
+<input type="text" id="accountName" name="Account Name">
+<span id="accountNameError" class="error"></span>
+<br><br>
+<label for="customerName">Customer Name</label>
+<input type="text" id="customerName" name="Customer Name">
+<br><br>
+<label for="phone"> Phone Number* :</label>
+<input type="tel" id="phone" name="Phone Number">
+<span id="phoneError" class="error"></span>
+<br><br>
+<label for="storetype">StoreType: </label>
+<input type="radio" id="consumablestore" name="StoreType" >
+
+<label for="consumablestore" > consumablestore</label>
+<input type="radio" id="processStore" name="StoreType">
+
+<label for="processStore" > Process Store</label>
+
+<input type="radio" id="qurantineStore" name="StoreType">
+<label for="qurantineStore" > Quarantine Store</label>
+
+<br><br>
+<input type="checkbox" id="privacy" name="privacy">
+<span id="privacyError" class="error"></span>
+<label for="privacy">privacy</label>
+<br><br>
+<label for="description"> Description: </label>
+<textarea name="Description" id="description" rows="3" cols="30"></textarea>
+<br><br>
+
+
+<button type="submit">Submit</button>
+</form>
+
+
+
+<script>
+
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function(event) {
+
+    // Clear previous errors
+    document.getElementById("selectTypeError").textContent = "";
+    document.getElementById("accountIdError").textContent = "";
+    document.getElementById("accountNameError").textContent = "";
+    document.getElementById("phoneError").textContent = "";
+    document.getElementById("privacyError").textContent = "";
+
+    const selectType = document.getElementById("selecttype").value;
+    const accountId = document.getElementById("accountId").value.trim();
+    const accountName = document.getElementById("accountName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const privacy = document.getElementById("privacy").checked;
+
+
+    if (selectType === "selecttype") {
+        document.getElementById("selectTypeError").textContent =
+            "Please select Type";
+        event.preventDefault();
+        return;
+    }
+
+
+    if (accountId === "") {
+        document.getElementById("accountIdError").textContent =
+            "Account ID is required";
+        event.preventDefault();
+        return;
+    }
+
+
+    const accountIdPattern = /^[A-Za-z]{3}[0-9]+$/;
+
+    if (!accountIdPattern.test(accountId)) {
+        document.getElementById("accountIdError").textContent =
+            "First 3 characters must be letters followed by numbers";
+        event.preventDefault();
+        return;
+    }
+
+
+    if (accountName === "") {
+        document.getElementById("accountNameError").textContent =
+            "Account Name is required";
+        event.preventDefault();
+        return;
+    }
+
+
+    if (phone === "") {
+        document.getElementById("phoneError").textContent =
+            "Phone Number is required";
+        event.preventDefault();
+        return;
+    }
+    const phonePattern = /^[0-9]+$/;
+
+if (!phonePattern.test(phone)) {
+    document.getElementById("phoneError").textContent =
+        "Phone Number must contain only numbers";
+    event.preventDefault();
+    return;
+}
+
+
+    if (!privacy) {
+        document.getElementById("privacyError").textContent =
+            "Please accept privacy";
+        event.preventDefault();
+        return;
+    }
+
+
+    alert("Form Submitted");
+
+});
+
+</script>
+</body>
+
+</html>

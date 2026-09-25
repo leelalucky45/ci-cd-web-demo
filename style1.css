@@ -1,0 +1,19 @@
+.container{
+    background-color: rgb(162, 37, 37);
+    color: blueviolet;
+}
+div h1{
+    background-color: white;
+}
+
+/* child class selector */
+ul>li{
+list-style-type: square;
+}
+a[target="_blank"]{
+   text-decoration:none ; 
+   color: black;
+   padding: 10px;
+   background-color: pink;
+   border-radius: 8px ;
+}

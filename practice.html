@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Registraion Form</title>
+    </head>
+    <body>
+        <h1>Student Registration Form</h1>
+        <form id="studentForm">
+            <label for="studentName"> Student Name: </label>
+            <input type="text" id="studentName" name="studentName">
+            <br><br>
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email">
+            <br><br>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name ="phone">
+           <br><br>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob">
+            <br><br>
+            <label>Gender: </label>
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name ="gender" value="female">
+            <label for=""></label>
+            <input type="radio" id="other" name="gender" value="Other">
+            <label for="other">Other</label>
+            <br><br>
+            <label for="course">Course: </label>
+            
+            <select name="course" id="course">
+                <option value="">Select Cousrse</option>
+                <option value="CSE">Computer Science</option>
+                <option value="ECE">Electronics</option>
+            </select>
+            <br><br>
+            <label for="address">Address</label>
+            <br>
+            <textarea name="address" id="address" rows="4" cols="30"></textarea>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <br><br>
+            <button type="submit"> Submit</button>       
+        </form>
+        <script>
+            let form=document.getElementById("studentForm");
+            form.addEventListener("submit",function(event){
+                event.preventDefault();
+                alert("form submitted");
+
+                let studentName=document.getElementById("studentName").value;
+                let email=document.getElementById("email").value;
+                let phone=document.getElementById("phone").value;
+                if(studentName==="")
+            {
+                alert("please enter your name");
+                return;
+            }
+            if(email==="")
+            {
+                alert("please enter your email");
+                return;
+            }
+            if(phone==="")
+            {
+                alert("please enter your phone number");
+                return;
+            }
+            alert("form submitted");
+            })
+        </script>
+    </body>
+</html>

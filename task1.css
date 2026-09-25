@@ -1,0 +1,198 @@
+body {
+
+font-family: Arial, sans-serif;
+
+background-color: #f3e8ff;
+
+margin: 0;
+
+padding: 40px;
+
+}
+
+form {
+
+width: 650px;
+
+margin: auto;
+
+}
+
+fieldset {
+
+background-color: white;
+
+border: 2px solid #9333ea;
+
+border-radius: 15px;
+
+padding: 30px;
+
+box-shadow: 0 5px 15px #c4b5fd;
+
+}
+
+h2 {
+
+text-align: center;
+
+color: #7e22ce;
+
+margin-top: 0;
+
+margin-bottom: 30px;
+
+}
+
+/* Each form field */
+
+.form-row {
+
+display: flex;
+
+align-items: flex-start;
+
+margin-bottom: 18px;
+
+}
+
+/* Labels */
+
+label {
+
+width: 170px;
+
+flex-shrink: 0;
+
+font-size: 16px;
+
+color: #4c1d95;
+
+padding-top: 10px;
+
+}
+
+/* Input + error wrapper */
+
+.input-container {
+
+width: 380px;
+
+}
+
+/* Input fields */
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+
+width: 100%;
+
+padding: 10px;
+
+border: 1px solid #c084fc;
+
+border-radius: 7px;
+
+box-sizing: border-box;
+
+}
+
+/* Textarea */
+
+textarea {
+
+width: 100%;
+
+height: 80px;
+
+padding: 10px;
+
+border: 1px solid #c084fc;
+
+border-radius: 7px;
+
+box-sizing: border-box;
+
+resize: vertical;
+
+font-family: Arial, sans-serif;
+
+}
+
+/* Focus effect */
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+
+border: 2px solid #9333ea;
+
+outline: none;
+
+}
+
+/* Radio buttons */
+
+input[type="radio"] {
+
+margin-left: 5px;
+
+}
+
+/* Gender */
+
+.gender-container {
+
+padding-top: 8px;
+
+}
+
+/* Error messages */
+
+.error {
+
+display: block;
+
+color: red;
+
+font-size: 13px;
+
+margin-left: 0;
+
+margin-top: 5px;
+
+}
+
+/* Register button */
+
+button {
+
+display: block;
+
+margin: 25px auto 0;
+
+background-color: #9333ea;
+
+color: white;
+
+border: none;
+
+padding: 11px 35px;
+
+font-size: 16px;
+
+border-radius: 8px;
+
+cursor: pointer;
+
+}
+
+button {
+
+background-color: #7e22ce;
+
+}

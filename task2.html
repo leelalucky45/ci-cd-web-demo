@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inputs</title>
+    <style>
+        button{
+            background-color: blue;
+            color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Input</h2>
+
+    
+    <input type="text" id="firstInput" placeholder="Enter text">
+    <button onclick="firstButton()">Click</button>
+
+    <br><br>
+
+    
+    <input type="text" id="secondInput" onchange="changeText()" placeholder="Enter text">
+    <button onclick="showText()">Show</button>
+
+    <p id="result"></p>
+
+    <br>
+
+    
+    <input type="text" id="thirdInput" oninput="inputText()" placeholder="Type something">
+
+
+    <script>
+
+        function firstButton() {
+
+            let text = document.getElementById("firstInput").value;
+
+            console.log(text);
+
+            alert(text);
+        }
+
+
+        function changeText() {
+
+            console.log("Changed");
+        }
+
+
+        function showText() {
+
+            let text = document.getElementById("secondInput").value;
+
+            document.getElementById("result").innerHTML = text;
+        }
+
+
+        function inputText() {
+
+            let text = document.getElementById("thirdInput").value;
+
+            console.log(text);
+        }
+
+    </script>
+
+</body>
+</html>

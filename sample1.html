@@ -1,0 +1,17 @@
+<form id="myForm">
+    <input type="text" name="username" placeholder="Enter Name">
+        <input type="text" name="mobile" placeholder="Enter Mobile Number">
+
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let data = new FormData(this);
+
+    console.log(data.get("mobile"));
+});
+</script>

@@ -1,0 +1,388 @@
+<!Doctype>
+<html>
+<head>
+<Title> Form</Title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 30px;
+    }
+
+    form {
+        width: 550px;
+        margin: auto;
+        background-color: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 9px;
+        margin-bottom: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #555;
+    }
+
+    .error {
+        color: red;
+        display: block;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .radio-group {
+        margin-bottom: 15px;
+    }
+
+    .radio-group label {
+        margin-right: 10px;
+        font-weight: normal;
+    }
+
+    .checkbox-group {
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #333;
+        color: white;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+</style>
+
+</head>
+
+<body>
+<form id="form"> 
+
+<label for="selecttype">Select Type* </label>
+
+<select id="selecttype" name="Select Type">
+    <option value="selecttype">Select Type</option>
+    <option value="Customer">Customer</option>
+    <option value="Vendor">Vendor</option>
+    <option value="Branch/Unit">Branch/Unit</option>
+</select>
+
+<span id="selectTypeError" class="error"></span>
+<br><br>
+<label for="accountId">Account Id*</label>
+
+<input type="text" id="accountId" name="Account Id*">
+
+<span id="accountIdError" class="error"></span>
+<br><br>
+<label for="accountName">Account Name* </label>
+
+<input type="text" id="accountName" name="Account Name">
+
+<span id="accountNameError" class="error"></span>
+<br><br>
+<label for="customerName">Customer Name</label>
+<input type="text" id="customerName" name="Customer Name">
+<br><br>
+<label for="phone">Phone Number* </label>
+
+<input type="tel" id="phone" name="Phone Number" maxlength="10">
+
+<span id="phoneError" class="error"></span>
+<br>
+<label for="storetype">StoreType: </label>
+<input type="radio" id="consumablestore" name="StoreType" >
+
+<label for="consumablestore" > <small>consumablestore</small></label>
+<input type="radio" id="processStore" name="StoreType">
+
+<label for="processStore" > <small>Process Store</small></label>
+
+<input type="radio" id="qurantineStore" name="StoreType">
+<label for="qurantineStore" > <small>Quarantine Store</small></label>
+
+<br><br>
+<input type="checkbox" id="privacy" name="privacy">
+<label for="privacy">privacy</label>
+
+<span id="privacyError" class="error"></span>
+<br>
+<label for="description"> Description: </label>
+<textarea name="Description" id="description" rows="3" cols="30"></textarea>
+<br><br>
+
+
+<button type="submit">Submit</button>
+</form>
+
+<script>
+
+const form = document.getElementById("form");
+
+// =====================================================
+// SUBMIT VALIDATION
+// =====================================================
+
+form.addEventListener("submit", function(event) {
+
+    // Clear previous errors
+    document.getElementById("selectTypeError").textContent = "";
+    document.getElementById("accountIdError").textContent = "";
+    document.getElementById("accountNameError").textContent = "";
+    document.getElementById("phoneError").textContent = "";
+    document.getElementById("privacyError").textContent = "";
+
+    // Get values
+    const selectType = document.getElementById("selecttype").value;
+    const accountId = document.getElementById("accountId").value.trim();
+    const accountName = document.getElementById("accountName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const privacy = document.getElementById("privacy").checked;
+
+    let isValid = true;
+
+
+    // Select Type
+    if (selectType === "selecttype") {
+        document.getElementById("selectTypeError").textContent =
+            "Please select Type";
+        isValid = false;
+    }
+
+
+    // Account ID
+    if (accountId === "") {
+
+        document.getElementById("accountIdError").textContent =
+            "Account ID is required";
+
+        isValid = false;
+
+    } else {
+
+        const accountIdPattern = /^[A-Za-z]{3}[0-9]+$/;
+
+        if (!accountIdPattern.test(accountId)) {
+
+            document.getElementById("accountIdError").textContent =
+                "First 3 characters must be letters followed by numbers";
+
+            isValid = false;
+        }
+    }
+
+
+    // Account Name
+    if (accountName === "") {
+
+        document.getElementById("accountNameError").textContent =
+            "Account Name is required";
+
+        isValid = false;
+    }
+
+
+    // Phone Number
+    if (phone === "") {
+
+        document.getElementById("phoneError").textContent =
+            "Phone Number is required";
+
+        isValid = false;
+
+    } else {
+
+        const phonePattern = /^[0-9]{10}$/;
+
+        if (!phonePattern.test(phone)) {
+
+            document.getElementById("phoneError").textContent =
+                "Phone Number must contain exactly 10 numbers";
+
+            isValid = false;
+        }
+    }
+
+
+    // Privacy
+    if (!privacy) {
+
+        document.getElementById("privacyError").textContent =
+            "Please accept privacy";
+
+        isValid = false;
+    }
+
+
+    // Stop form submission if invalid
+    if (!isValid) {
+        event.preventDefault();
+        return;
+    }
+
+    alert("Form Submitted");
+
+});
+
+
+// =====================================================
+// LIVE SELECT TYPE VALIDATION
+// =====================================================
+
+document.getElementById("selecttype")
+    .addEventListener("change", function() {
+
+        const error =
+            document.getElementById("selectTypeError");
+
+        if (this.value === "selecttype") {
+            error.textContent = "Please select Type";
+        } else {
+            error.textContent = "";
+        }
+
+    });
+
+
+// =====================================================
+// LIVE ACCOUNT ID VALIDATION
+// =====================================================
+
+document.getElementById("accountId")
+    .addEventListener("input", function() {
+
+        const accountId = this.value.trim();
+
+        const error =
+            document.getElementById("accountIdError");
+
+        const accountIdPattern =
+            /^[A-Za-z]{3}[0-9]+$/;
+
+
+        if (accountId === "") {
+
+            error.textContent = "";
+
+        } else if (!accountIdPattern.test(accountId)) {
+
+            error.textContent =
+                "First 3 characters must be letters followed by numbers";
+
+        } else {
+
+            error.textContent = "";
+        }
+
+    });
+
+
+// =====================================================
+// LIVE ACCOUNT NAME VALIDATION
+// =====================================================
+
+document.getElementById("accountName")
+    .addEventListener("input", function() {
+
+        const error =
+            document.getElementById("accountNameError");
+
+        if (this.value.trim() === "") {
+
+            error.textContent =
+                "Account Name is required";
+
+        } else {
+
+            error.textContent = "";
+        }
+
+    });
+
+
+// =====================================================
+// LIVE PHONE VALIDATION
+// =====================================================
+
+document.getElementById("phone")
+    .addEventListener("input", function() {
+
+        const phone = this.value.trim();
+
+        const error =
+            document.getElementById("phoneError");
+
+
+        if (phone === "") {
+
+            error.textContent = "";
+
+        } else if (!/^[0-9]+$/.test(phone)) {
+
+            error.textContent =
+                "Phone Number must contain only numbers";
+
+        } else if (phone.length < 10) {
+
+            error.textContent =
+                "Phone Number must contain exactly 10 numbers";
+
+        } else {
+
+            error.textContent = "";
+        }
+
+    });
+
+
+// =====================================================
+// LIVE PRIVACY VALIDATION
+// =====================================================
+
+document.getElementById("privacy")
+    .addEventListener("change", function() {
+
+        const error =
+            document.getElementById("privacyError");
+
+        if (this.checked) {
+
+            error.textContent = "";
+
+        } else {
+
+            error.textContent =
+                "Please accept privacy";
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>
